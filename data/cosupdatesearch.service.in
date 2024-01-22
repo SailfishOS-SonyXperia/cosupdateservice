@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0 -*- systemd -*-
+#
+# SPDX-FileCopyrightText: Copyright (C) 2024 Björn Bidar
+#
+[Unit]
+Description=Sailfish OS Update search daemon
+Documentation=https://github.com/SailfishOS-SonyXperia/cosupdateservice
+
+[Service]
+Type=simple
+ExecStart=@KDE_INSTALL_FULL_LIBEXECDIR@/@COSU_SERVICE_TRIGGER_EXECUTABLE_NAME@ --trigger

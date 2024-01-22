@@ -1,0 +1,58 @@
+#+TITLE: Architecture of Cosu
+* Diagram
+  :PROPERTIES:
+  :CREATED:  [2024-02-21 Wed 08:43]
+  :END:
+  #+begin_src plantuml :file images/architecture-diagram-components.png
+  @startuml
+  skinparam componentStyle rectangle
+
+  package "Cosu" {
+          [CosuService]
+          [CosuTrigger]
+          [CosuProxy]
+  }
+
+  package "SailfishOS-Updater" {
+          [OSUpdateService]
+          [Sailfish OS Updates Settings]
+  }
+
+  [CosuTrigger] -> [CosuService] : Fires update search time systemd activates CosuTrigger
+  [Sailfish OS Updates Settings] --> [OSUpdateService]
+  [OSUpdateService] <-- [CosuProxy] : Listen for signal updater changed signal
+  [CosuProxy] --> [CosuService] :  Call whenever ui searches for updates
+  "OS Update Search" ..> [Sailfish OS Updates Settings]
+  "OS Update search" ..> [CosuTrigger]
+  @enduml
+  #+end_src
+
+#+RESULTS:
+[[file:images/architecture-diagram-components.png]]
+
+* Components
+  :PROPERTIES:
+  :CREATED:  [2024-02-21 Wed 08:43]
+  :END:
+** CosuService
+   :PROPERTIES:
+   :CREATED:  [2024-02-21 Wed 08:44]
+   :END:
+   The service searches for updates and notifies the /Sailfish OS Updater/
+   about the new update.
+
+** CosuTrigger and timer
+   :PROPERTIES:
+   :CREATED:  [2024-02-21 Wed 08:43]
+   :END:
+   CosuTrigger's purpose is to call upon /CosuService/ whenever it's time
+   is executed.
+
+** CosuOsUpdateServiceProxy
+   :PROPERTIES:
+   :CREATED:  [2024-02-21 Wed 08:44]
+   :END:
+   The proxies sits between the /Sailfish OS Updater/ and the /CosuService/.
+   It listens for changes in the updater to call upon Cosu when the updater
+   tries to search for updates so that Cosu can notify the user about new updates
+   whenever the user tries to search for updates.
