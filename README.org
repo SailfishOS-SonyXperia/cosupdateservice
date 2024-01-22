@@ -1,0 +1,28 @@
+#+TITLE: Community Os Update Service (Cosu)
+* Description
+  :PROPERTIES:
+  :CREATED:  [2024-02-22 Thu 09:50]
+  :END:
+  Cosu's purpose is to alert the Sailfish OS Updater (Ui) about new updates.
+  For deeper information on how this is achieved please read read [[file:doc/architecture.org][Architecture of Cosu]].
+
+* Requirements
+  :PROPERTIES:
+  :CREATED:  [2024-02-22 Thu 09:50]
+  :END:
+
+  + A shared repository for Cosu to search through to find the updates.
+    Also called a aggregate repository.
+  + One package to be tagged according to the ~versionPackageSeparator~ with
+    the current supported Sailfish Os Version.
+  + Configuration to tell the Service in which repository the osUpdatePackage
+    is contained in.
+  + Any configuration necessary to configure Cosu where the device differs from the
+    default configuration.
+
+* Installation and testing
+  :PROPERTIES:
+  :CREATED:  [2024-02-22 Thu 09:57]
+  :END:
+
+  Please refer to [[file:INSTALL.org]]

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# SPDX-FileCopyrightText: Copyright (C) 2024 Björn Bidar
+#
+[Unit]
+Description=Sailfish OS Update search timer
+Documentation=https://github.com/SailfishOS-SonyXperia/cosupdateservice
+
+[Timer]
+Unit=@COSU_SERVICE_TRIGGER_EXECUTABLE_NAME@.service
+OnStartupSec=10min
+OnUnitActiveSec=7h 54min
+
+[Install]
+WantedBy=user-session.target

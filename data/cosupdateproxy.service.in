@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: GPL-2.0 -*- systemd -*-
+#
+# SPDX-FileCopyrightText: Copyright (C) 2024 Björn Bidar
+#
+[Unit]
+Description=Sailfish COSU Os Update Service Proxy
+Documentation=https://github.com/SailfishOS-SonyXperia/cosupdateservice
+
+[Service]
+Type=simple
+ExecStart=@KDE_INSTALL_FULL_LIBEXECDIR@/@COSU_SERVICE_PROXY_EXECUTABLE_NAME@
+
+[Install]
+WantedBy=user-session.target

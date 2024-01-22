@@ -1,0 +1,7 @@
+#define COSU_CONF_DIRECTORIES ${COSU_CONF_DIRECTORIES}"
+#define COSU_DBUS_SERVICENAME QStringLiteral("${COSU_DBUS_SERVICENAME}")
+#define COSU_DBUS_PATH QStringLiteral("${COSU_DBUS_PATH}")
+#define COSU_DBUS_INTERFACE "${COSU_DBUS_INTERFACE}"
+
+#cmakedefine01 packagekitqt5_FOUND
+#cmakedefine01 ZYPP_FOUND
