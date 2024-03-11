@@ -1,0 +1,70 @@
+#+TITLE: Install instructions
+
+* Requirements
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 19:59]
+  :END:
+
+  - Configured Os Update Package repository
+  - Configuration for Cosu
+
+  For both read [[file:doc/configuration.org]] and [[file:doc/release_aggregation.org]]
+
+* Installation
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 19:59]
+  :END:
+  To install Cosu the repository containing it has to be added to the device.
+  Either by downloading the feature package and installing it or by first
+  adding the repository and then installing the package.
+
+  See also [[https://docs.sailfishos.org/Reference/Sailfish_OS_Cheat_Sheet/#repository-handling][Sailfish OS Cheat Sheet | Sailfish OS Documentation]].
+
+** Installation on existing devices
+   :PROPERTIES:
+   :CREATED:  [2024-03-09 Sat 20:02]
+   :END:
+   1. Add the feature repository
+      #+begin_src sh
+      ssu ar feature_tmp https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/kumano:/features:/sailfishos-sonyxperia/latest_aarch64/
+      #+end_src
+   2. Refresh
+      #+begin_src sh
+      pkcon refresh
+      #+end_src
+   3. Install packages
+      #+begin_src sh
+      pkcon install feature-cosupdateservice
+      #+end_src
+   4. Remove the temporary repository
+      #+begin_src sh
+      ssu rr feature_tmp
+      #+end_src
+   5. Reboot the device. After the reboot the service will search for updates
+      on it's own and on demand.
+
+**  Installation during image creation
+   :PROPERTIES:
+   :CREATED:  [2024-03-09 Sat 20:02]
+   :END:
+
+   To install Cosu during the image creation the kickstart file as to be modified.
+   1. First the repository containing Cosu has to be added at the top of
+      the kickstart file like this:
+      #+begin_src sh
+      repo --name=feature-cosu --baseurl=https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/kumano:/feature-cosu
+      #+end_src
+   2. Now the packages for Cosu have to be added to the ~%packages~ section.
+      Insert ~feature-cosupdateservice~ and ~pattern-cosu~ in between ~%packages~
+      and ~%end~ like below:
+      #+begin_src conf
+      %packages
+      feature-cosupdateservice
+      pattern-cosu
+      feature-sailfishos-sonyxperia
+      patterns-sailfish-device-configuration-j8210
+      %end
+      #+end_src
+
+   After executing these two steps you can proceed to create your devices images
+   as usual.

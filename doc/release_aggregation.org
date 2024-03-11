@@ -1,0 +1,26 @@
+#+TITLE: Release package aggregation
+* Introduction
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 22:58]
+  :END:
+  Cosu depends aggregation of the Os Update Package or release package
+  into a repository that can be accessed by all devices no matter which release
+  they are at.
+
+* Release aggregation repository
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 22:58]
+  :END:
+  The repository has to be setup that contains all Os Update Packages.
+  After each release the package has to be aggregated from its original repository
+  e.g. usually the adaptation repository.
+
+  For example like this:
+  #+begin_src sh
+  osc aggregatepac --nosources SOURCEPRJ SOURCEPAC DESTPRJ
+  #+end_src
+
+  You can also find [[https://github.com/SailfishOS-SonyXperia/build/blob/master/osc_aggregate_release_package.py][osc_aggregate_release_package.py]] as an example for a aggregate script.
+
+  The name of the release aggregation repository has to be added as /osUpdatePackageRepo/
+  in the [[file:configuration.org::*site][site]] section in the Cosu configuration.

@@ -1,0 +1,69 @@
+#+TITLE: Configuration for Cosu
+
+* Description
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 21:37]
+  :END:
+
+  Cosu's configuration is to tell it how to search for updates.
+  Most of the default configuration should be sufficient enough
+  to run Cosu while only a few have to be adjusted.
+
+* Configuration directories
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 21:47]
+  :END:
+
+  - /usr/lib/cosupdateservice/conf.d
+  - /etc/cosupdateservice/conf.d
+
+* Options
+  :PROPERTIES:
+  :CREATED:  [2024-03-09 Sat 22:03]
+  :END:
+
+  Options are organized in Section as in ~[Section]~ and
+  then a list of variables under each section.
+  The heading /All/ refers to options applicable to all sections.
+
+  Options can contain variables from other options of the same section.
+  Variables look like this: ~%(variable)~.
+
+  Variables support basic substitution:
+  - ~%(foo:+bar)~ :: expands to ~""~ if ~foo~ is set, bar otherwise
+  - ~%(foo:-bar)~ :: expands to ~%(foo)~ if ~foo~ is set, bar otherwise
+  - ~%(%(foo):=bar?foobar|baz)~ :: expands to ~foobar~ if ~%(foo)~ == ~bar~, to ~baz~
+    otherwise. ~%(foo)~ should only be alphanumeric. It must not
+    contain the character ~?~.
+
+  Options are parsed from files found the directories mentioned in [[Configuration directories]]
+  in alphabetic order.
+  If a option is set in a file previously found it is taken from the file found last
+  containing the option.
+
+** All
+   :PROPERTIES:
+   :CREATED:  [2024-03-09 Sat 22:05]
+   :END:
+   - sanityVariables :: A list of Variables that have to be set to ensure
+     that Cosu is a sane state
+
+** Site
+   :PROPERTIES:
+   :CREATED:  [2024-03-09 Sat 22:06]
+   :END:
+   - osUpdatePackageRepo :: The repository containing the package indicating a
+     operating system update. The name should match the zypp alias of the repository.
+     *This variable is not set by default and has to be supplied manually!*
+
+** Adaptation
+   :PROPERTIES:
+   :CREATED:  [2024-03-09 Sat 22:15]
+   :END:
+   - osUpdatePackageName :: the name of the package indicating a
+     operating system update without any modifiers such as the model of the device
+   - osupdate-package-pattern :: The full name of the package above but with any modifiers
+     defaults to %(osUpdatePackageName)-%(deviceModel)
+   - versionPackageSeparator :: The separator between the operating system version in the
+     version of the /osUpdatePackage/ as in for example ~4.4.0+git1~ where the operating system
+     version found would be ~4.4.0~. Defaults to /+/.
