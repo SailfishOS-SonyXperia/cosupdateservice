@@ -28,33 +28,25 @@
 
    The full instructions to add the repository depend if the users device is the "devel"[fn:1] flavor or "testing" [fn:2]
 
-   1. Add the feature repository
+   1. Visit the url matching to release flavor of the device on the device
 
       *NOTE: Replace aarch64 with the architecture of the one used on your device if it doesn't
       match yours*
 
       * A "devel"
       #+begin_src sh
-      ssu ar feature_tmp https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/kumano:/features:/sailfishos-sonyxperia/latest_aarch64/
+      https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/kumano:/features:/sailfishos-sonyxperia/latest_aarch64/noarch
       #+end_src
       * B "testing"
       #+begin_src sh
       RELEASE=4.5.0.24
-      ssu ar feature_tmp https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/kumano:/features:/cosupdater:/$RELEASE/latest_aarch64/
+      https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/kumano:/features:/cosupdater:/$RELEASE/latest_aarch64/noarch
       #+end_src
       *NOTE: Replace release with Sailfish OS version currently installed on the device*
-   2. Refresh
-      #+begin_src sh
-      pkcon refresh
-      #+end_src
-   3. Install packages
-      #+begin_src sh
-      pkcon install feature-cosupdateservice
-      #+end_src
-   4. Remove the temporary repository
-      #+begin_src sh
-      ssu rr feature_tmp
-      #+end_src
+   2. Tap on the link for the package "feature-cosupdateservice" to download it.
+   3. Open the settings app, got to "System->Untrusted Software", tap checkbox the "Allow unstrusted software" if did not do so
+      before
+   4. Go back to the setttings app, tap Checkbox the "Allow unstrusted software" again to disable it if you did not do so following these step.
    5. Reboot the device. After the reboot the service will search for updates
       on it's own and on demand.
 
