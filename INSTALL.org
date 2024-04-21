@@ -13,6 +13,7 @@
 * Installation
   :PROPERTIES:
   :CREATED:  [2024-03-09 Sat 19:59]
+  :ID:       af086083-f98e-4daf-9eb3-2f4fea965ed5
   :END:
   To install Cosu the repository containing it has to be added to the device.
   Either by downloading the feature package and installing it or by first
@@ -24,10 +25,24 @@
    :PROPERTIES:
    :CREATED:  [2024-03-09 Sat 20:02]
    :END:
+
+   The full instructions to add the repository depend if the users device is the "devel"[fn:1] flavor or "testing" [fn:2]
+
    1. Add the feature repository
+
+      *NOTE: Replace aarch64 with the architecture of the one used on your device if it doesn't
+      match yours*
+
+      * A "devel"
       #+begin_src sh
       ssu ar feature_tmp https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/kumano:/features:/sailfishos-sonyxperia/latest_aarch64/
       #+end_src
+      * B "testing"
+      #+begin_src sh
+      RELEASE=4.5.0.24
+      ssu ar feature_tmp https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/kumano:/features:/cosupdater:/$RELEASE/latest_aarch64/
+      #+end_src
+      *NOTE: Replace release with Sailfish OS version currently installed on the device*
    2. Refresh
       #+begin_src sh
       pkcon refresh
@@ -68,3 +83,10 @@
 
    After executing these two steps you can proceed to create your devices images
    as usual.
+
+* Footnotes
+
+[fn:1] Unreleased flavor of the adaptation, to work on the the adaptation without breaking users
+
+[fn:2] Released flavor of the adaptation, for users to install
+
